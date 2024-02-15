@@ -67,7 +67,8 @@ struct ContentView: View {
         }
         .searchable(text: $vm.searchText, prompt: "Looking for some wifu?")
         .onAppear {
-            vm.getWaifu()
+//            vm.getWaifu()
+            vm.getWaifuAsync()
         }
 
     }
