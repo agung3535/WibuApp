@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-
+@MainActor
 class HomeViewModel: ObservableObject {
     
     @Published private var waifuData:[WaifuDomainModel] = []
@@ -51,6 +51,27 @@ class HomeViewModel: ObservableObject {
             case .failure(let failure):
                 self.loadingData.toggle()
                 self.errorMessage = failure.localizedDescription
+            }
+        }
+    }
+    
+    func getWaifuAsync() {
+        loadingData = true
+        Task {
+            do {
+                let waifu = try await service.getWaifuDataAsyncAWait()
+                switch waifu {
+                case .success(let data):
+                    self.loadingData.toggle()
+                    self.waifuData = data.map({ data in
+                        data.toDomainModel()
+                    })
+                case .failure(let failure):
+                    self.loadingData.toggle()
+                    self.errorMessage = failure.localizedDescription
+                }
+            }catch {
+                self.errorMessage = error.localizedDescription
             }
         }
     }

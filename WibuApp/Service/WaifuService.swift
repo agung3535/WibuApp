@@ -11,6 +11,7 @@ import Foundation
 protocol WaifuServiceProtocol {
     func getWaifuData(completion: @escaping (Result<[WaifuModel], APIError>) -> Void)
     func downloadImage(url: URL, completion: @escaping (Result<Data, APIError>) -> Void)
+    func getWaifuDataAsyncAWait() async throws -> Result<[WaifuModel], APIError>
 }
 
 class WaifuService: WaifuServiceProtocol {
@@ -56,5 +57,24 @@ class WaifuService: WaifuServiceProtocol {
         }
     }
     
+    func getWaifuDataAsyncAWait() async throws -> Result<[WaifuModel], APIError> {
+        do {
+            let data = try await networkManager.fetchDataAsyncAwait(urlPath: .all)
+            switch data {
+            case .success(let success):
+                let decoder = JSONDecoder()
+                do {
+                    let json = try decoder.decode([WaifuModel].self, from: success)
+                    return .success(json)
+                } catch {
+                    return .failure(.decodeFailure)
+                }
+            case .failure(let failure):
+                return .failure(failure)
+            }
+        }catch {
+            return .failure(.other(error))
+        }
+    }
     
 }

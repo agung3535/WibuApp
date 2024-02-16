@@ -28,7 +28,6 @@ struct ContentView: View {
                                 size: CGSize(width: 100, height: 120),
                                 data: nilai
                             )
-                            .contentShape(RoundedRectangle(cornerRadius: 10))
                             .contextMenu(menuItems: {
                                 Button(action: {
                                     vm.deleteWaifu(data: nilai)
@@ -67,8 +66,17 @@ struct ContentView: View {
         }
         .searchable(text: $vm.searchText, prompt: "Looking for some wifu?")
         .onAppear {
-            vm.getWaifu()
+            vm.getWaifuAsync()
         }
+        .overlay {
+            if !vm.searchText.isEmpty && vm.waifuResult.isEmpty {
+                ContentUnavailableView.search(text: vm.searchText)
+            }
+        }
+        .refreshable {
+            vm.getWaifuAsync()
+        }
+      
 
     }
 }

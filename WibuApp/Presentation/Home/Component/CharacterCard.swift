@@ -13,18 +13,33 @@ struct CharacterCard: View {
     var data: WaifuDomainModel
     
     var body: some View {
-        VStack {
-            AsyncImage(url: data.image) { image in
-                image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: size.width, height: size.height)
-                    .clipShape(
-                        RoundedRectangle(cornerRadius: 10)
-                    )
-            } placeholder: {
-                WaitView()
-                    .frame(width: size.width, height: size.height)
+        VStack {            
+            AsyncImage(url: data.image) { phase in
+                switch phase {
+                case .empty:
+                    WaitView()
+                        .frame(width: size.width, height: size.height)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: size.width, height: size.height)
+                        .clipShape(
+                            RoundedRectangle(cornerRadius: 10)
+                        )
+                case .failure(let error):
+                    VStack {
+                        Image(systemName: "photo.fill")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: size.width, height: size.height)
+                            .clipShape(
+                                RoundedRectangle(cornerRadius: 10)
+                            )
+                    }
+                @unknown default:
+                    fatalError()
+                }
             }
                 
             Text(data.name + "\n")
@@ -37,6 +52,7 @@ struct CharacterCard: View {
                 .lineLimit(1)
                 .padding(.horizontal, 5)
         }
+        .contentShape(RoundedRectangle(cornerRadius: 10))
     }
 }
 
