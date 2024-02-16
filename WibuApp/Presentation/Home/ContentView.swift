@@ -30,7 +30,8 @@ struct ContentView: View {
                             )
                             .contextMenu(menuItems: {
                                 Button(action: {
-                                    vm.deleteWaifu(data: nilai)
+                                    vm.setDeletedCharacter(data: nilai)
+                                    vm.showConfirmDialog()
                                 }, label: {
                                     Label(
                                         title: { Text("Delete") },
@@ -47,17 +48,31 @@ struct ContentView: View {
                                 }
 
                             })
+                            .confirmationDialog("Are you sure to delete this item?", isPresented: $vm.isShowConfirmationDialog, titleVisibility: .visible, actions: {
+                                Button(role: .destructive) {
+                                        vm.deleteWaifu()
+                                    } label: {
+                                        Text("Yes, Sure!")
+                                    }
+
+                            }, message: {
+                                Text("This action cannot be undone!")
+                            })
 
                         }
                     })
                 }
             }
+            
             .sheet(isPresented: $vm.shareOptionsIsPresent, content: {
-                if let image = vm.imageToShare {
-                    ShareSheetView(activityItems: ["Share something",image])
-                }else {
-                    ShareSheetView(activityItems: ["Share something"])
+                Group {
+                    if let image = vm.imageToShare {
+                        ShareSheetView(activityItems: ["Share something",image])
+                    }else {
+                        ShareSheetView(activityItems: ["Share something"])
+                    }
                 }
+                .presentationDetents([.medium, .large])
                 
             })
             .navigationTitle("Wibu App")

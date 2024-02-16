@@ -20,12 +20,15 @@ class HomeViewModel: ObservableObject {
     
     @Published var shareOptionsIsPresent: Bool = false
     
+    @Published var isShowConfirmationDialog: Bool = false
+    
+    private (set) var characterToDelete: WaifuDomainModel?
+    
     private var service: WaifuServiceProtocol
     
     init(service: WaifuServiceProtocol) {
         self.service = service
     }
-    
     
     var waifuResult: [WaifuDomainModel] {
         guard !searchText.isEmpty else {
@@ -88,12 +91,28 @@ class HomeViewModel: ObservableObject {
         }
     }
     
-    func deleteWaifu(data: WaifuDomainModel) {
+    func deleteWaifu() {
+        guard let data = self.characterToDelete else {
+            return
+        }
+        print("data deleted = \(self.characterToDelete)")
         let index = waifuData.firstIndex { $0.id == data.id}
         guard let index = index else {
             return
         }
         waifuData.remove(at: index)
+    }
+    
+    func showConfirmDialog() {
+        self.isShowConfirmationDialog = true
+    }
+    
+    func presentShareSheet() {
+        self.shareOptionsIsPresent = true
+    }
+    
+    func setDeletedCharacter(data: WaifuDomainModel) {
+        self.characterToDelete = data
     }
     
 }
