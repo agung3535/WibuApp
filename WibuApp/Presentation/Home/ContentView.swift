@@ -65,11 +65,12 @@ struct ContentView: View {
             }
             
             .sheet(isPresented: $vm.shareOptionsIsPresent, content: {
+                let defaultText = "Share something"
                 Group {
                     if let image = vm.imageToShare {
-                        ShareSheetView(activityItems: ["Share something",image])
+                        ShareSheetView(activityItems: [defaultText,image])
                     }else {
-                        ShareSheetView(activityItems: ["Share something"])
+                        ShareSheetView(activityItems: [defaultText])
                     }
                 }
                 .presentationDetents([.medium, .large])
@@ -79,7 +80,7 @@ struct ContentView: View {
             .toolbarTitleDisplayMode(.large)
             .padding()
         }
-        .searchable(text: $vm.searchText, prompt: "Looking for some wifu?")
+        .searchable(text: $vm.searchText, prompt: "Looking for some waifu?")
         .onAppear {
             vm.getWaifuAsync()
         }

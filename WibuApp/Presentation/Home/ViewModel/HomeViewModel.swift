@@ -95,7 +95,6 @@ class HomeViewModel: ObservableObject {
         guard let data = self.characterToDelete else {
             return
         }
-        print("data deleted = \(self.characterToDelete)")
         let index = waifuData.firstIndex { $0.id == data.id}
         guard let index = index else {
             return
@@ -105,10 +104,6 @@ class HomeViewModel: ObservableObject {
     
     func showConfirmDialog() {
         self.isShowConfirmationDialog = true
-    }
-    
-    func presentShareSheet() {
-        self.shareOptionsIsPresent = true
     }
     
     func setDeletedCharacter(data: WaifuDomainModel) {
