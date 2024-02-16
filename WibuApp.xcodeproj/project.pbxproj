@@ -16,8 +16,8 @@
 		B61F51112B7B76760011D79F /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61F51102B7B76760011D79F /* NetworkManager.swift */; };
 		B61F51142B7B77D70011D79F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61F51132B7B77D70011D79F /* HomeViewModel.swift */; };
 		B61F51172B7B79100011D79F /* WaifuService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61F51162B7B79100011D79F /* WaifuService.swift */; };
+		B63266992B7F0F4E00CA729E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B63266982B7F0F4E00CA729E /* Localizable.xcstrings */; };
 		B6D3683F2B7E299E0081A435 /* ShareSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D3683E2B7E299E0081A435 /* ShareSheetView.swift */; };
-		B6D368412B7E8ABB0081A435 /* NetworkManagerAsyncAwait.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D368402B7E8ABB0081A435 /* NetworkManagerAsyncAwait.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +31,8 @@
 		B61F51102B7B76760011D79F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		B61F51132B7B77D70011D79F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		B61F51162B7B79100011D79F /* WaifuService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaifuService.swift; sourceTree = "<group>"; };
+		B63266982B7F0F4E00CA729E /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		B6D3683E2B7E299E0081A435 /* ShareSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetView.swift; sourceTree = "<group>"; };
-		B6D368402B7E8ABB0081A435 /* NetworkManagerAsyncAwait.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerAsyncAwait.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,12 +65,12 @@
 		B61F50F72B7B07390011D79F /* WibuApp */ = {
 			isa = PBXGroup;
 			children = (
+				B63266962B7F0AC600CA729E /* Resource */,
 				B61F51152B7B79000011D79F /* Service */,
 				B61F510A2B7B07F70011D79F /* Network */,
 				B61F51092B7B07ED0011D79F /* Model */,
 				B61F51072B7B07D10011D79F /* Presentation */,
 				B61F51062B7B07C60011D79F /* App */,
-				B61F50FC2B7B073A0011D79F /* Assets.xcassets */,
 				B61F50FE2B7B073A0011D79F /* Preview Content */,
 			);
 			path = WibuApp;
@@ -123,7 +123,6 @@
 			isa = PBXGroup;
 			children = (
 				B61F51102B7B76760011D79F /* NetworkManager.swift */,
-				B6D368402B7E8ABB0081A435 /* NetworkManagerAsyncAwait.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -150,6 +149,23 @@
 				B61F51162B7B79100011D79F /* WaifuService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		B63266962B7F0AC600CA729E /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				B63266972B7F0C3600CA729E /* String */,
+				B61F50FC2B7B073A0011D79F /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		B63266972B7F0C3600CA729E /* String */ = {
+			isa = PBXGroup;
+			children = (
+				B63266982B7F0F4E00CA729E /* Localizable.xcstrings */,
+			);
+			path = String;
 			sourceTree = "<group>";
 		};
 		B6D3683D2B7E29930081A435 /* Component */ = {
@@ -202,6 +218,7 @@
 			knownRegions = (
 				en,
 				Base,
+				id,
 			);
 			mainGroup = B61F50EC2B7B07390011D79F;
 			productRefGroup = B61F50F62B7B07390011D79F /* Products */;
@@ -220,6 +237,7 @@
 			files = (
 				B61F51002B7B073A0011D79F /* Preview Assets.xcassets in Resources */,
 				B61F50FD2B7B073A0011D79F /* Assets.xcassets in Resources */,
+				B63266992B7F0F4E00CA729E /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +252,6 @@
 				B61F51142B7B77D70011D79F /* HomeViewModel.swift in Sources */,
 				B61F510D2B7B3B930011D79F /* CharacterCard.swift in Sources */,
 				B61F51112B7B76760011D79F /* NetworkManager.swift in Sources */,
-				B6D368412B7E8ABB0081A435 /* NetworkManagerAsyncAwait.swift in Sources */,
 				B61F50FB2B7B07390011D79F /* ContentView.swift in Sources */,
 				B61F51172B7B79100011D79F /* WaifuService.swift in Sources */,
 				B6D3683F2B7E299E0081A435 /* ShareSheetView.swift in Sources */,

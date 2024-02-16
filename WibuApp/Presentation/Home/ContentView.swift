@@ -30,7 +30,8 @@ struct ContentView: View {
                             )
                             .contextMenu(menuItems: {
                                 Button(action: {
-                                    vm.deleteWaifu(data: nilai)
+                                    vm.setDeletedCharacter(data: nilai)
+                                    vm.showConfirmDialog()
                                 }, label: {
                                     Label(
                                         title: { Text("Delete") },
@@ -47,24 +48,39 @@ struct ContentView: View {
                                 }
 
                             })
+                            .confirmationDialog("Are you sure to delete this item?", isPresented: $vm.isShowConfirmationDialog, titleVisibility: .visible, actions: {
+                                Button(role: .destructive) {
+                                        vm.deleteWaifu()
+                                    } label: {
+                                        Text("Yes, Sure!")
+                                    }
+
+                            }, message: {
+                                Text("This action cannot be undone!")
+                            })
 
                         }
                     })
                 }
             }
+            
             .sheet(isPresented: $vm.shareOptionsIsPresent, content: {
-                if let image = vm.imageToShare {
-                    ShareSheetView(activityItems: ["Share something",image])
-                }else {
-                    ShareSheetView(activityItems: ["Share something"])
+                let defaultText = "Share something"
+                Group {
+                    if let image = vm.imageToShare {
+                        ShareSheetView(activityItems: [defaultText,image])
+                    }else {
+                        ShareSheetView(activityItems: [defaultText])
+                    }
                 }
+                .presentationDetents([.medium, .large])
                 
             })
             .navigationTitle("Wibu App")
             .toolbarTitleDisplayMode(.large)
             .padding()
         }
-        .searchable(text: $vm.searchText, prompt: "Looking for some wifu?")
+        .searchable(text: $vm.searchText, prompt: "Looking for some waifu?")
         .onAppear {
             vm.getWaifuAsync()
         }
